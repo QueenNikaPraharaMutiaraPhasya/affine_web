@@ -1,82 +1,769 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Affine Cipher</title>
-<style>
-  body{font-family:system-ui,sans-serif;max-width:760px;margin:30px auto;padding:0 16px;background:#f4f6fa;color:#222}
-  h1{margin-bottom:4px} .card{background:#fff;padding:18px;border-radius:10px;margin:14px 0;box-shadow:0 1px 4px #0002}
-  label{font-weight:600;margin-right:6px} select,input[type=number]{padding:6px;margin-right:16px}
-  textarea{width:100%;height:110px;padding:8px;box-sizing:border-box;font-family:monospace}
-  button{padding:8px 18px;margin:8px 8px 0 0;border:0;border-radius:6px;background:#2f5bea;color:#fff;cursor:pointer}
-  button.alt{background:#1a8f5a} .err{color:#c0392b;font-weight:600;min-height:20px}
-  h3{margin:14px 0 6px}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AFFINIX — 8-Bit Crypto Tool</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}">
 </head>
+
+
 <body>
-<h1>Affine Cipher</h1>
-<p>C = (a·P + b) mod 26 &nbsp;|&nbsp; P = a⁻¹·(C − b) mod 26</p>
 
-<div class="card">
-  <label>Kunci a</label>
-  <select id="a">{% for v in valid_a %}<option value="{{v}}">{{v}}</option>{% endfor %}</select>
-  <label>Kunci b</label>
-  <input type="number" id="b" min="0" max="25" value="0">
-  <div class="err" id="err"></div>
-</div>
+<main class="landing-page">
 
-<div class="card">
-  <h3>Teks</h3>
-  <textarea id="text" placeholder="Ketik teks di sini..."></textarea>
-  <button onclick="doText('encrypt')">Enkripsi</button>
-  <button class="alt" onclick="doText('decrypt')">Dekripsi</button>
-  <h3>Hasil (asli)</h3><textarea id="r_full" readonly></textarea>
-  <h3>Format tanpa spasi</h3><textarea id="r_nospace" readonly></textarea>
-  <h3>Format kelompok 5 huruf</h3><textarea id="r_groups" readonly></textarea>
-</div>
 
-<div class="card">
-  <h3>File (teks / biner: jpg, docx, mp3, mp4, dll)</h3>
-  <input type="file" id="file"><br>
-  <button onclick="doFile('encrypt')">Enkripsi File</button>
-  <button class="alt" onclick="doFile('decrypt')">Dekripsi File</button>
-  <p style="font-size:13px">Enkripsi menghasilkan <code>.dat</code>. Dekripsi mengembalikan ekstensi asli otomatis.</p>
-</div>
+    <!-- =====================================================
+         NAVBAR
+         ===================================================== -->
 
-<script>
-const err = m => document.getElementById('err').textContent = m || '';
-const $ = id => document.getElementById(id);
+    <nav class="navbar">
 
-function keyForm(mode){
-  const fd = new FormData();
-  fd.append('a', $('a').value); fd.append('b', $('b').value); fd.append('mode', mode);
-  return fd;
-}
+        <a href="#home" class="logo">
 
-async function doText(mode){
-  err('');
-  const fd = keyForm(mode); fd.append('text', $('text').value);
-  const res = await fetch('/api/text', {method:'POST', body:fd});
-  const j = await res.json();
-  if(!j.ok){ err(j.error); return; }
-  $('r_full').value = j.result; $('r_nospace').value = j.no_space; $('r_groups').value = j.groups;
-}
+            <span class="logo-icon">
+                <img
+                    src="{{ url_for('static', filename='assets/circle-x.svg') }}"
+                    alt="AFFINIX">
+            </span>
 
-async function doFile(mode){
-  err('');
-  const f = $('file').files[0];
-  if(!f){ err('Pilih file terlebih dahulu.'); return; }
-  const fd = keyForm(mode); fd.append('file', f);
-  const res = await fetch('/api/file', {method:'POST', body:fd});
-  if(!res.ok){ err((await res.json()).error); return; }
-  const cd = res.headers.get('Content-Disposition') || '';
-  const m = cd.match(/filename\*?=(?:UTF-8'')?"?([^";]+)"?/i);
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(await res.blob());
-  a.download = m ? decodeURIComponent(m[1]) : 'hasil.dat';
-  a.click();
-}
-</script>
+            AFFINIX
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a
+                href="#home">
+                Home
+            </a>
+
+            <a href="#cipher">
+                Encrypt
+            </a>
+
+            <a href="#cipher">
+                Decrypt
+            </a>
+
+            <a href="#about">
+                About
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section
+        id="home"
+        class="hero">
+
+
+        <!-- HERO TEXT -->
+
+        <div class="hero-content">
+
+            <span class="hero-badge">
+                8-BIT CRYPTO TOOL
+            </span>
+
+
+            <h1>
+                AFFINIX
+            </h1>
+
+
+            <p>
+                Encrypt and decrypt text and files securely
+                using the retro Affine Cipher mathematical
+                algorithm. Perfect for retro developers,
+                puzzle masters, and digital archivists.
+            </p>
+
+        </div>
+
+
+
+        <!-- HERO MASCOT -->
+
+        <div class="hero-mascot">
+
+            <img
+                src="{{ url_for('static', filename='assets/mascot-pixel.png') }}"
+                alt="AFFINIX Mascot">
+
+
+            <!-- decorative elements -->
+
+            <div class="hero-decoration hero-star">
+
+                <img
+                    src="{{ url_for('static', filename='assets/star.svg') }}"
+                    alt="">
+
+            </div>
+
+
+            <div class="hero-decoration hero-lock">
+
+                <img
+                    src="{{ url_for('static', filename='assets/lock-keyhole.svg') }}"
+                    alt="">
+
+            </div>
+
+
+            <div class="hero-decoration hero-heart">
+
+                <img
+                    src="{{ url_for('static', filename='assets/heart-off.svg') }}"
+                    alt="">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         HOW TO CIPHER
+         ===================================================== -->
+
+    <section class="how-section">
+
+
+        <div class="section-heading">
+
+            <h2>
+                HOW TO CIPHER
+            </h2>
+
+            <p>
+                Mastering the mechanical math of 8-bit
+                cryptography in three quick steps.
+            </p>
+
+        </div>
+
+
+
+        <div class="steps">
+
+
+            <!-- STEP 1 -->
+
+            <div class="step-card">
+
+                <span class="step-number">
+                    1
+                </span>
+
+                <div>
+
+                    <h3>
+                        ENTER TEXT
+                    </h3>
+
+                    <p>
+                        Paste your message or select code
+                        strings inside our simple 8-bit text box.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 2 -->
+
+            <div class="step-card active-step">
+
+                <span class="step-number">
+                    2
+                </span>
+
+                <div>
+
+                    <h3>
+                        SET KEYS
+                    </h3>
+
+                    <p>
+                        Input custom numeric factors (a, b)
+                        where 'a' must share no common factors
+                        with 26.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- STEP 3 -->
+
+            <div class="step-card">
+
+                <span class="step-number">
+                    3
+                </span>
+
+                <div>
+
+                    <h3>
+                        TRANSLATE
+                    </h3>
+
+                    <p>
+                        Hit execute to watch the math blocks
+                        shift characters perfectly onto the grid.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CIPHER
+         ===================================================== -->
+
+    <section
+        id="cipher"
+        class="cipher-section">
+
+
+        <div class="section-heading">
+
+            <h2>
+                LIVE RETRO ENCRYPTOR PREVIEW
+            </h2>
+
+            <p>
+                Experience the Affine mathematical function
+                <br>
+                E(x) = (a × x + b) mod 26 in retro real-time!
+            </p>
+
+        </div>
+
+
+
+        <!-- CIPHER TERMINAL -->
+
+        <div class="cipher-terminal">
+
+
+            <div class="terminal-status">
+                SECURE SESSION // AFFINE_ALGO
+            </div>
+
+
+
+            <!-- =================================================
+                 TABS
+                 ================================================= -->
+
+            <div class="tabs">
+
+
+                <button
+                    class="tab active"
+                    id="textTab"
+                    type="button">
+
+                    Plain Text
+
+                </button>
+
+
+                <button
+                    class="tab"
+                    id="fileTab"
+                    type="button">
+
+                    File Upload
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 OPERATION
+                 ================================================= -->
+
+            <div class="field-group">
+
+                <label>
+                    OPERATION MODE
+                </label>
+
+
+                <div class="operation-buttons">
+
+                    <button
+                        id="encryptBtn"
+                        class="operation active"
+                        type="button">
+
+                        ENCRYPT
+
+                    </button>
+
+
+                    <button
+                        id="decryptBtn"
+                        class="operation"
+                        type="button">
+
+                        DECRYPT
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 TEXT INPUT
+                 ================================================= -->
+
+            <div
+                id="textInputArea"
+                class="field-group">
+
+                <label>
+                    INPUT TEXT
+                </label>
+
+
+                <textarea
+                    id="text"
+                    placeholder="TYPE YOUR MESSAGE..."></textarea>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 FILE INPUT
+                 ================================================= -->
+
+            <div
+                id="fileInputArea"
+                class="field-group hidden">
+
+                <label>
+                    UPLOAD FILE
+                </label>
+
+
+                <div
+                    id="fileDropzone"
+                    class="file-dropzone">
+
+
+                    <div class="upload-icon">
+                        ↑
+                    </div>
+
+
+                    <h3>
+                        Drag &amp; drop your file here
+                    </h3>
+
+
+                    <p>
+                        or
+                    </p>
+
+
+                    <label
+                        for="file"
+                        class="browse-button">
+
+                        Browse Files
+
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="file"
+                        class="file-input">
+
+
+                    <p>
+                        Supports TXT, JPG, DOCX, MP3, MP4 &amp; more
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 KEYS
+                 ================================================= -->
+
+            <div class="keys">
+
+
+                <div class="field-group">
+
+                    <label>
+                        KEY (A)
+                    </label>
+
+
+                    <select id="a">
+
+                        {% for v in valid_a %}
+
+                        <option value="{{ v }}">
+                            {{ v }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+
+                <div class="field-group">
+
+                    <label>
+                        KEY (B)
+                    </label>
+
+
+                    <input
+                        type="number"
+                        id="b"
+                        min="0"
+                        max="25"
+                        value="0">
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ERROR -->
+
+            <div
+                id="err"
+                class="error-message">
+            </div>
+
+
+
+            <!-- =================================================
+                 RUN
+                 ================================================= -->
+
+            <div class="run-area">
+
+                <button
+                    id="runBtn"
+                    class="run-button"
+                    type="button">
+
+                    RUN &gt;&gt;
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 RESULT
+                 ================================================= -->
+
+            <div class="result-section">
+
+
+                <span class="result-title">
+                    RESULT
+                </span>
+
+
+                <!-- ==============================
+                     TEXT RESULTS
+                     ============================== -->
+
+                <div id="textOutputs">
+
+
+                    <!-- MAIN RESULT -->
+
+                    <div class="result-box">
+
+
+                        <div class="result-box-header">
+
+                            <span class="result-box-title">
+                                OUTPUT
+                            </span>
+
+
+                            <button
+                                class="copy-button"
+                                type="button"
+                                data-copy-target="r_full">
+
+                                COPY
+
+                            </button>
+
+                        </div>
+
+
+                        <textarea
+                            id="r_full"
+                            readonly>
+                        </textarea>
+
+                    </div>
+
+
+
+                    <!-- TWO FORMATS -->
+
+                    <div class="output-formats">
+
+
+                        <!-- WITHOUT SPACES -->
+
+                        <div class="output-box">
+
+
+                            <div class="output-box-header">
+
+                                <span class="output-box-title">
+                                    WITHOUT SPACES
+                                </span>
+
+
+                                <button
+                                    class="copy-button"
+                                    type="button"
+                                    data-copy-target="r_nospace">
+
+                                    COPY
+
+                                </button>
+
+                            </div>
+
+
+                            <textarea
+                                id="r_nospace"
+                                readonly>
+                            </textarea>
+
+                        </div>
+
+
+
+                        <!-- GROUPS OF 5 -->
+
+                        <div class="output-box groups">
+
+
+                            <div class="output-box-header">
+
+                                <span class="output-box-title">
+                                    GROUPS OF 5
+                                </span>
+
+
+                                <button
+                                    class="copy-button"
+                                    type="button"
+                                    data-copy-target="r_groups">
+
+                                    COPY
+
+                                </button>
+
+                            </div>
+
+
+                            <textarea
+                                id="r_groups"
+                                readonly>
+                            </textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ==============================
+                     FILE RESULT
+                     ============================== -->
+
+                <div id="fileResultContainer">
+                    <!--
+                    Result file akan muncul otomatis
+                    setelah RUN.
+                    -->
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PROTOCOLS
+         ===================================================== -->
+
+    <section
+        id="about"
+        class="protocol-section">
+
+
+        <div class="section-heading">
+
+            <h2>
+                8-BIT CRYPTO PROTOCOLS
+            </h2>
+
+            <p>
+                Everything you need for retro-style
+                data encryption and parsing.
+            </p>
+
+        </div>
+
+
+
+        <div class="protocol-cards">
+
+
+            <div class="protocol-card blue">
+
+                <div class="protocol-icon">
+                    ▣
+                </div>
+
+                <h3>
+                    TEXT ENCRYPTION
+                </h3>
+
+                <p>
+                    Enter your message, choose keys (a, b),
+                    and transform your plaintext into
+                    unreadable cipher blocks instantly.
+                </p>
+
+            </div>
+
+
+
+            <div class="protocol-card pink">
+
+                <div class="protocol-icon">
+                    ⊗
+                </div>
+
+                <h3>
+                    TEXT DECRYPTION
+                </h3>
+
+                <p>
+                    Received an encrypted note?
+                    Paste the raw cipher blocks, enter
+                    matching parameters, and reveal the truth.
+                </p>
+
+            </div>
+
+
+
+            <div class="protocol-card yellow">
+
+                <div class="protocol-icon">
+                    ◉
+                </div>
+
+                <h3>
+                    SECURE ALGORITHM
+                </h3>
+
+                <p>
+                    Built strictly around mathematical
+                    coprime validation rules.
+                    Safe, local, non-tracking execution.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+         ===================================================== -->
+
+    <footer class="footer">
+
+        <h3>
+            AFFINIX
+        </h3>
+
+        <p>
+            © 2026 AFFINIX. ALL RIGHTS RESERVED RETRO CORP.
+        </p>
+
+    </footer>
+
+</main>
+
+
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
 </body>
 </html>

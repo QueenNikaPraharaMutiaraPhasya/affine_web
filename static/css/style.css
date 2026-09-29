@@ -1,0 +1,1573 @@
+/* =========================================================
+   AFFINIX
+   ========================================================= */
+
+/* ---------- FONTS ---------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Jersey+20&display=swap');
+
+
+/* ---------- COLOR SYSTEM ---------- */
+
+:root {
+    --bg: #0D0D2D;
+    --bg-section: #11113A;
+
+    --panel: #1A1A4E;
+    --panel-dark: #13133E;
+
+    --blue: #4A90D9;
+    --blue-dark: #1E2A68;
+
+    --pink: #FF4F9A;
+    --pink-dark: #4A1C48;
+
+    --yellow: #FFB830;
+    --yellow-dark: #5A4610;
+
+    --white: #F5F5FF;
+    --text: #D5D5E8;
+    --muted: #8E8EAA;
+
+    --border: #202052;
+    --border-dark: #101010;
+
+    --danger: #FF5C7A;
+    --success: #62E58A;
+
+    --display-font: "Jersey 20", sans-serif;
+    --mono-font: "Geist Mono", monospace;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    background: var(--bg);
+    color: var(--white);
+
+    font-family: var(--mono-font);
+
+    overflow-x: hidden;
+}
+
+button,
+input,
+textarea,
+select {
+    font-family: var(--mono-font);
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =========================================================
+   MAIN PAGE
+   ========================================================= */
+
+.landing-page {
+    width: 100%;
+    min-height: 3200px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    background-color: var(--bg);
+}
+
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+
+.navbar {
+    width: 100%;
+    height: 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 80px;
+
+    background: rgba(13, 13, 45, 0.97);
+
+    border-bottom: 1px solid var(--border);
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+
+    color: var(--yellow);
+
+    font-family: var(--display-font);
+    font-size: 36px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-decoration: none;
+}
+
+.logo-icon {
+    width: 23px;
+    height: 23px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 3px;
+
+    background: var(--blue);
+
+    border: 2px solid var(--white);
+}
+
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* ---------- NAV LINKS ---------- */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+
+    gap: 48px;
+}
+
+.nav-links a {
+    color: #B6B6CD;
+
+    font-family: var(--mono-font);
+    font-size: 15px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-links a:hover {
+    color: var(--pink);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.hero {
+    width: 100%;
+    min-height: 620px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 80px;
+
+    gap: 48px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border-bottom: 1px solid var(--border);
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.025) 1px,
+            transparent 1px
+        );
+
+    background-size: 100% 48px;
+    background-color: var(--bg);
+}
+
+
+/* ---------- HORIZONTAL DECORATIVE LINES ---------- */
+
+.hero::before,
+.hero::after {
+    content: "";
+
+    position: absolute;
+    left: 0;
+
+    width: 100%;
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.035);
+
+    pointer-events: none;
+}
+
+.hero::before {
+    top: 35%;
+}
+
+.hero::after {
+    bottom: 20%;
+}
+
+
+/* ---------- HERO CONTENT ---------- */
+
+.hero-content {
+    width: 53%;
+
+    position: relative;
+    z-index: 3;
+}
+
+.hero-badge {
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    color: var(--bg);
+    background: var(--pink);
+
+    border: 2px solid var(--white);
+
+    font-family: var(--display-font);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-transform: uppercase;
+}
+
+.hero h1 {
+    margin-top: 18px;
+    margin-bottom: 20px;
+
+    color: var(--white);
+
+    font-family: var(--display-font);
+    font-size: 84px;
+    font-weight: 400;
+    line-height: 84px;
+
+    text-transform: uppercase;
+
+    text-shadow:
+        3px 3px 0 rgba(77, 163, 255, 0.12);
+}
+
+.hero p {
+    max-width: 620px;
+
+    color: var(--text);
+
+    font-family: var(--mono-font);
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 160%;
+}
+
+
+/* =========================================================
+   HERO MASCOT
+   ========================================================= */
+
+.hero-mascot {
+    width: 47%;
+    min-height: 390px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    z-index: 3;
+}
+
+
+/* ---------- MASCOT GLOW ---------- */
+
+.hero-mascot::before {
+    content: "";
+
+    position: absolute;
+
+    width: 350px;
+    height: 350px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(74, 144, 217, 0.20) 0%,
+            rgba(74, 144, 217, 0.08) 42%,
+            transparent 72%
+        );
+
+    filter: blur(5px);
+
+    z-index: 0;
+}
+
+.hero-mascot > img {
+    width: 340px;
+
+    position: relative;
+    z-index: 2;
+
+    image-rendering: pixelated;
+
+    filter:
+        drop-shadow(
+            0 0 18px rgba(74, 144, 217, 0.25)
+        );
+}
+
+
+/* =========================================================
+   HERO DECORATIONS
+   ========================================================= */
+
+.hero-decoration {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 3;
+}
+
+.hero-decoration img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+}
+
+
+/* STAR */
+
+.hero-star {
+    width: 17px;
+    height: 17px;
+
+    top: 80px;
+    left: 20%;
+
+    border: 2px solid var(--border-dark);
+    background: var(--yellow);
+}
+
+
+/* LOCK */
+
+.hero-lock {
+    width: 18px;
+    height: 18px;
+
+    top: 78px;
+    right: 18%;
+}
+
+
+/* HEART / ERROR */
+
+.hero-heart {
+    width: 18px;
+    height: 18px;
+
+    right: 20%;
+    bottom: 78px;
+
+    border: 2px solid var(--border-dark);
+    background: var(--yellow);
+}
+
+
+/* =========================================================
+   HOW TO CIPHER
+   ========================================================= */
+
+.how-section {
+    width: 100%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 56px;
+
+    padding: 80px 80px 120px;
+
+    background: var(--bg-section);
+
+    border-bottom: 3px solid var(--yellow);
+}
+
+
+/* ---------- SECTION HEADING ---------- */
+
+.section-heading {
+    width: 100%;
+
+    text-align: center;
+}
+
+.section-heading h2 {
+    color: var(--yellow);
+
+    font-family: var(--display-font);
+    font-size: 48px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-transform: uppercase;
+}
+
+.section-heading p {
+    margin-top: 14px;
+
+    color: var(--muted);
+
+    font-family: var(--mono-font);
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 170%;
+}
+
+
+/* ---------- STEP CARDS ---------- */
+
+.steps {
+    width: 100%;
+    max-width: 1300px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.step-card {
+    min-height: 145px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 14px;
+
+    padding: 20px;
+
+    background: rgba(13, 13, 45, 0.55);
+
+    border: 2px solid var(--border);
+
+    transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.step-card:hover {
+    border-color: var(--blue);
+
+    transform: translateY(-3px);
+}
+
+.step-card.active-step {
+    border-color: var(--yellow);
+}
+
+
+/* ---------- STEP NUMBER ---------- */
+
+.step-number {
+    width: 29px;
+    height: 29px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--bg);
+
+    background: var(--blue);
+
+    font-family: var(--mono-font);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.step-card.active-step .step-number {
+    background: var(--yellow);
+}
+
+
+/* ---------- STEP TEXT ---------- */
+
+.step-card h3 {
+    margin-bottom: 12px;
+
+    color: var(--white);
+
+    font-family: var(--display-font);
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.step-card.active-step h3 {
+    color: var(--yellow);
+}
+
+.step-card p {
+    color: var(--muted);
+
+    font-family: var(--mono-font);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 165%;
+}
+
+
+/* =========================================================
+   CIPHER SECTION
+   ========================================================= */
+
+.cipher-section {
+    width: 100%;
+
+    padding: 76px 30px 90px;
+
+    background: var(--bg);
+}
+
+
+/* ---------- TERMINAL ---------- */
+
+.cipher-terminal {
+    width: 100%;
+    max-width: 930px;
+
+    margin: 0 auto;
+
+    padding: 28px 30px 30px;
+
+    position: relative;
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.012) 1px,
+            transparent 1px
+        );
+
+    background-size: 100% 40px;
+
+    background-color: #0C0C29;
+
+    border: 3px solid var(--white);
+
+    box-shadow:
+        0 0 0 1px var(--blue-dark),
+        0 0 35px rgba(74, 144, 217, 0.05);
+}
+
+.terminal-status {
+    margin-bottom: 24px;
+
+    color: var(--blue);
+
+    font-family: var(--mono-font);
+    font-size: 10px;
+    font-weight: 500;
+
+    letter-spacing: 0.5px;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   INPUT TABS
+   ========================================================= */
+
+.tabs {
+    display: flex;
+    gap: 8px;
+
+    margin-bottom: 30px;
+}
+
+.tab {
+    padding: 9px 15px;
+
+    color: var(--text);
+
+    background: var(--panel-dark);
+
+    border: 2px solid var(--border);
+
+    font-family: var(--mono-font);
+    font-size: 14px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.tab:hover {
+    border-color: var(--blue);
+}
+
+.tab.active {
+    color: var(--white);
+
+    background: var(--blue);
+
+    border-color: var(--white);
+}
+
+
+/* =========================================================
+   GENERAL FIELD
+   ========================================================= */
+
+.field-group {
+    margin-bottom: 24px;
+}
+
+.field-group > label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    color: var(--white);
+
+    font-family: var(--display-font);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   OPERATION BUTTONS
+   ========================================================= */
+
+.operation-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.operation {
+    padding: 9px 16px;
+
+    color: var(--text);
+
+    background: var(--panel-dark);
+
+    border: 2px solid var(--border);
+
+    font-family: var(--mono-font);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.operation:hover {
+    border-color: var(--pink);
+}
+
+.operation.active {
+    color: var(--white);
+
+    background: var(--pink);
+
+    border-color: var(--white);
+}
+
+
+/* =========================================================
+   TEXTAREA
+   ========================================================= */
+
+textarea {
+    width: 100%;
+    min-height: 100px;
+
+    padding: 14px;
+
+    display: block;
+
+    color: var(--white);
+
+    background: rgba(15, 15, 49, 0.85);
+
+    border: 2px solid var(--blue);
+
+    outline: none;
+
+    resize: vertical;
+
+    font-family: var(--mono-font);
+    font-size: 13px;
+    font-weight: 400;
+
+    line-height: 160%;
+}
+
+textarea:focus {
+    border-color: var(--yellow);
+
+    box-shadow:
+        0 0 0 2px rgba(255, 184, 48, 0.08);
+}
+
+textarea::placeholder {
+    color: #646487;
+}
+
+
+/* =========================================================
+   FILE DROPZONE
+   ========================================================= */
+
+.file-dropzone {
+    width: 100%;
+    min-height: 215px;
+
+    padding: 22px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    background: rgba(20, 20, 64, 0.55);
+
+    border: 2px dashed var(--border);
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.file-dropzone:hover,
+.file-dropzone.dragover {
+    background: rgba(74, 144, 217, 0.06);
+
+    border-color: var(--blue);
+}
+
+
+/* ---------- UPLOAD ICON ---------- */
+
+.upload-icon {
+    width: 48px;
+    height: 48px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 16px;
+
+    color: var(--white);
+
+    background: var(--blue);
+
+    border: 2px solid var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 24px;
+}
+
+
+/* ---------- DROPZONE TEXT ---------- */
+
+.file-dropzone h3 {
+    margin-bottom: 8px;
+
+    color: var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 17px;
+    font-weight: 700;
+}
+
+.file-dropzone p {
+    margin-bottom: 14px;
+
+    color: var(--muted);
+
+    font-family: var(--mono-font);
+    font-size: 11px;
+    line-height: 150%;
+}
+
+
+/* ---------- BROWSE BUTTON ---------- */
+
+.browse-button {
+    display: inline-block;
+
+    padding: 10px 20px;
+
+    color: var(--bg);
+
+    background: var(--yellow);
+
+    border: 2px solid var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.browse-button:hover {
+    filter: brightness(1.08);
+}
+
+.file-input {
+    display: none;
+}
+
+
+/* ---------- SELECTED FILE ---------- */
+
+.selected-file {
+    width: 100%;
+
+    margin-top: 16px;
+    padding: 12px 14px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 12px;
+
+    background: rgba(74, 144, 217, 0.06);
+
+    border: 2px solid var(--blue);
+
+    text-align: left;
+}
+
+.selected-file-name {
+    min-width: 0;
+
+    overflow: hidden;
+
+    color: var(--white);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.selected-file-size {
+    flex-shrink: 0;
+
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   KEY INPUTS
+   ========================================================= */
+
+.keys {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+}
+
+.keys select,
+.keys input {
+    width: 100%;
+    height: 42px;
+
+    padding: 0 12px;
+
+    color: var(--white);
+
+    background: rgba(15, 15, 49, 0.85);
+
+    border: 2px solid var(--blue);
+
+    outline: none;
+
+    font-family: var(--mono-font);
+    font-size: 14px;
+}
+
+.keys select:focus,
+.keys input:focus {
+    border-color: var(--yellow);
+}
+
+
+/* =========================================================
+   ERROR
+   ========================================================= */
+
+.error-message {
+    min-height: 18px;
+
+    margin-bottom: 4px;
+
+    color: var(--danger);
+
+    font-family: var(--mono-font);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   RUN
+   ========================================================= */
+
+.run-area {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+
+    gap: 16px;
+
+    margin: 12px 0 28px;
+}
+
+.run-area::before,
+.run-area::after {
+    content: "";
+
+    flex: 1;
+
+    height: 2px;
+
+    background: var(--border);
+}
+
+.run-button {
+    flex-shrink: 0;
+
+    padding: 9px 21px;
+
+    color: var(--bg);
+
+    background: var(--pink);
+
+    border: 2px solid var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.run-button:hover {
+    filter: brightness(1.08);
+
+    transform: translateY(-1px);
+}
+
+.run-button:disabled {
+    opacity: 0.5;
+
+    cursor: wait;
+}
+
+
+/* =========================================================
+   RESULT SECTION
+   ========================================================= */
+
+.result-section {
+    width: 100%;
+
+    margin-top: 4px;
+}
+
+.result-title {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: var(--pink);
+
+    font-family: var(--display-font);
+    font-size: 19px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   MAIN RESULT BOX
+   ========================================================= */
+
+.result-box {
+    width: 100%;
+
+    margin-bottom: 16px;
+
+    background: rgba(255, 79, 154, 0.025);
+
+    border: 2px solid var(--pink);
+}
+
+.result-box-header {
+    min-height: 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 8px 12px;
+
+    border-bottom: 1px solid rgba(255, 79, 154, 0.25);
+}
+
+.result-box-title {
+    color: var(--pink);
+
+    font-family: var(--display-font);
+    font-size: 16px;
+}
+
+.copy-button {
+    padding: 6px 10px;
+
+    color: var(--pink);
+
+    background: transparent;
+
+    border: 1px solid var(--pink);
+
+    font-family: var(--mono-font);
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.copy-button:hover {
+    color: var(--bg);
+
+    background: var(--pink);
+}
+
+.result-box textarea {
+    min-height: 90px;
+
+    border: 0;
+    border-top: 0;
+
+    background: rgba(15, 15, 49, 0.85);
+}
+
+
+/* =========================================================
+   OUTPUT FORMAT BOXES
+   ========================================================= */
+
+.output-formats {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 16px;
+}
+
+.output-box {
+    background: rgba(13, 13, 45, 0.75);
+
+    border: 2px solid var(--blue);
+}
+
+.output-box.groups {
+    border-color: var(--yellow);
+}
+
+.output-box-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 40px;
+
+    padding: 8px 12px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.output-box-title {
+    color: var(--white);
+
+    font-family: var(--display-font);
+    font-size: 16px;
+    line-height: 1;
+}
+
+.output-box textarea {
+    min-height: 82px;
+
+    border: 0;
+
+    background: transparent;
+}
+
+
+/* =========================================================
+   FILE RESULT
+   ========================================================= */
+
+#fileResultContainer {
+    width: 100%;
+}
+
+.file-result-card {
+    width: 100%;
+
+    min-height: 74px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 13px 14px;
+
+    background: rgba(255, 79, 154, 0.035);
+
+    border: 2px solid var(--pink);
+}
+
+.result-file-info {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+}
+
+.result-file-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--pink);
+
+    background: var(--panel-dark);
+
+    border: 2px solid var(--pink);
+
+    font-size: 18px;
+}
+
+.result-file-name {
+    overflow: hidden;
+
+    color: var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 13px;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.result-file-size {
+    margin-top: 4px;
+
+    color: var(--muted);
+
+    font-family: var(--mono-font);
+    font-size: 10px;
+}
+
+.download-button {
+    flex-shrink: 0;
+
+    padding: 10px 16px;
+
+    color: var(--bg);
+
+    background: var(--pink);
+
+    border: 2px solid var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.download-button:hover {
+    filter: brightness(1.08);
+}
+
+
+/* =========================================================
+   PROTOCOL SECTION
+   ========================================================= */
+
+.protocol-section {
+    width: 100%;
+
+    padding: 76px 80px 90px;
+
+    background: var(--bg);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.protocol-cards {
+    width: 100%;
+    max-width: 1300px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 20px;
+}
+
+.protocol-card {
+    min-height: 190px;
+
+    padding: 22px 18px;
+
+    background: rgba(17, 17, 58, 0.55);
+
+    border: 2px solid var(--border);
+
+    transition:
+        transform 0.2s ease;
+}
+
+.protocol-card:hover {
+    transform: translate(-2px, -2px);
+}
+
+.protocol-card.blue {
+    border-color: var(--blue);
+
+    box-shadow:
+        4px 4px 0 var(--blue-dark);
+}
+
+.protocol-card.pink {
+    border-color: var(--pink);
+
+    box-shadow:
+        4px 4px 0 var(--pink-dark);
+}
+
+.protocol-card.yellow {
+    border-color: var(--yellow);
+
+    box-shadow:
+        4px 4px 0 var(--yellow-dark);
+}
+
+
+/* ---------- PROTOCOL ICON ---------- */
+
+.protocol-icon {
+    width: 32px;
+    height: 32px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 17px;
+
+    color: var(--white);
+
+    border: 2px solid var(--white);
+
+    font-family: var(--mono-font);
+    font-size: 14px;
+}
+
+
+/* ---------- PROTOCOL TEXT ---------- */
+
+.protocol-card h3 {
+    margin-bottom: 12px;
+
+    color: var(--white);
+
+    font-family: var(--display-font);
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+}
+
+.protocol-card p {
+    color: var(--muted);
+
+    font-family: var(--mono-font);
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 170%;
+}
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.footer {
+    width: 100%;
+
+    padding: 44px 80px 60px;
+
+    background:
+        linear-gradient(
+            rgba(255, 255, 255, 0.018) 1px,
+            transparent 1px
+        );
+
+    background-size: 100% 48px;
+
+    border-top: 1px solid var(--border);
+}
+
+.footer h3 {
+    color: var(--yellow);
+
+    font-family: var(--display-font);
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.footer p {
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-family: var(--mono-font);
+    font-size: 10px;
+    line-height: 150%;
+}
+
+
+/* =========================================================
+   UTILITY
+   ========================================================= */
+
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        padding: 0 40px;
+    }
+
+    .hero {
+        padding: 70px 50px;
+    }
+
+    .hero h1 {
+        font-size: 70px;
+        line-height: 70px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .steps,
+    .protocol-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .output-formats {
+        grid-template-columns: 1fr;
+    }
+
+    .how-section,
+    .protocol-section {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .navbar {
+        height: auto;
+
+        flex-direction: column;
+
+        gap: 16px;
+
+        padding: 18px 20px;
+    }
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        flex-wrap: wrap;
+
+        gap: 18px;
+    }
+
+    .logo {
+        font-size: 32px;
+    }
+
+    .hero {
+        min-height: auto;
+
+        flex-direction: column;
+
+        padding: 60px 24px;
+
+        text-align: center;
+    }
+
+    .hero-content,
+    .hero-mascot {
+        width: 100%;
+    }
+
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+        line-height: 60px;
+    }
+
+    .hero p {
+        font-size: 15px;
+    }
+
+    .hero-mascot img {
+        width: 280px;
+    }
+
+    .how-section,
+    .protocol-section {
+        padding: 60px 20px 70px;
+    }
+
+    .cipher-section {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .cipher-terminal {
+        padding: 20px 16px;
+    }
+
+    .keys {
+        grid-template-columns: 1fr;
+    }
+
+    .file-result-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .download-button {
+        width: 100%;
+    }
+
+    .section-heading h2 {
+        font-size: 38px;
+    }
+}
