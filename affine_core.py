@@ -1,8 +1,4 @@
 """
-affine_core.py - Core logic Affine Cipher (Anggota 1)
-
-Dipakai oleh Anggota 2 (GUI + file handling).
-
 Rumus:
     Enkripsi : C = (a*P + b) mod m
     Dekripsi : P = a^-1 * (C - b) mod m
