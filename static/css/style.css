@@ -1092,11 +1092,11 @@ textarea::placeholder {
 .copy-button {
     padding: 6px 10px;
 
-    color: var(--pink);
+    color: var(--white);
 
     background: transparent;
 
-    border: 1px solid var(--pink);
+    border: 1px solid var(--white);
 
     font-family: var(--mono-font);
     font-size: 10px;
